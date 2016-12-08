@@ -1,0 +1,72 @@
+c:\users\ayman\documents\visual studio 2015\Projects\RestAPI\RestAPI\bin\ApplicationInsights.config
+c:\users\ayman\documents\visual studio 2015\Projects\RestAPI\RestAPI\bin\roslyn\csc.exe
+c:\users\ayman\documents\visual studio 2015\Projects\RestAPI\RestAPI\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+c:\users\ayman\documents\visual studio 2015\Projects\RestAPI\RestAPI\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+c:\users\ayman\documents\visual studio 2015\Projects\RestAPI\RestAPI\bin\roslyn\Microsoft.CodeAnalysis.dll
+c:\users\ayman\documents\visual studio 2015\Projects\RestAPI\RestAPI\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+c:\users\ayman\documents\visual studio 2015\Projects\RestAPI\RestAPI\bin\roslyn\Microsoft.CSharp.Core.targets
+c:\users\ayman\documents\visual studio 2015\Projects\RestAPI\RestAPI\bin\roslyn\Microsoft.VisualBasic.Core.targets
+c:\users\ayman\documents\visual studio 2015\Projects\RestAPI\RestAPI\bin\roslyn\System.Collections.Immutable.dll
+c:\users\ayman\documents\visual studio 2015\Projects\RestAPI\RestAPI\bin\roslyn\System.Reflection.Metadata.dll
+c:\users\ayman\documents\visual studio 2015\Projects\RestAPI\RestAPI\bin\roslyn\vbc.exe
+c:\users\ayman\documents\visual studio 2015\Projects\RestAPI\RestAPI\bin\roslyn\VBCSCompiler.exe
+c:\users\ayman\documents\visual studio 2015\Projects\RestAPI\RestAPI\bin\roslyn\VBCSCompiler.exe.config
+c:\users\ayman\documents\visual studio 2015\Projects\RestAPI\RestAPI\bin\RestAPI.dll.config
+c:\users\ayman\documents\visual studio 2015\Projects\RestAPI\RestAPI\bin\RestAPI.dll
+c:\users\ayman\documents\visual studio 2015\Projects\RestAPI\RestAPI\bin\RestAPI.pdb
+c:\users\ayman\documents\visual studio 2015\Projects\RestAPI\RestAPI\bin\JsonServices.dll
+c:\users\ayman\documents\visual studio 2015\Projects\RestAPI\RestAPI\bin\JsonServices.Web.dll
+c:\users\ayman\documents\visual studio 2015\Projects\RestAPI\RestAPI\bin\Microsoft.AI.Agent.Intercept.dll
+c:\users\ayman\documents\visual studio 2015\Projects\RestAPI\RestAPI\bin\Microsoft.AI.DependencyCollector.dll
+c:\users\ayman\documents\visual studio 2015\Projects\RestAPI\RestAPI\bin\Microsoft.AI.PerfCounterCollector.dll
+c:\users\ayman\documents\visual studio 2015\Projects\RestAPI\RestAPI\bin\Microsoft.AI.ServerTelemetryChannel.dll
+c:\users\ayman\documents\visual studio 2015\Projects\RestAPI\RestAPI\bin\Microsoft.AI.Web.dll
+c:\users\ayman\documents\visual studio 2015\Projects\RestAPI\RestAPI\bin\Microsoft.AI.WindowsServer.dll
+c:\users\ayman\documents\visual studio 2015\Projects\RestAPI\RestAPI\bin\Microsoft.ApplicationInsights.dll
+c:\users\ayman\documents\visual studio 2015\Projects\RestAPI\RestAPI\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+c:\users\ayman\documents\visual studio 2015\Projects\RestAPI\RestAPI\bin\Newtonsoft.Json.dll
+c:\users\ayman\documents\visual studio 2015\Projects\RestAPI\RestAPI\bin\Microsoft.AI.DependencyCollector.xml
+c:\users\ayman\documents\visual studio 2015\Projects\RestAPI\RestAPI\bin\Microsoft.AI.ServerTelemetryChannel.xml
+c:\users\ayman\documents\visual studio 2015\Projects\RestAPI\RestAPI\bin\Microsoft.AI.Web.xml
+c:\users\ayman\documents\visual studio 2015\Projects\RestAPI\RestAPI\bin\Microsoft.AI.WindowsServer.xml
+c:\users\ayman\documents\visual studio 2015\Projects\RestAPI\RestAPI\bin\Microsoft.ApplicationInsights.xml
+c:\users\ayman\documents\visual studio 2015\Projects\RestAPI\RestAPI\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+c:\users\ayman\documents\visual studio 2015\Projects\RestAPI\RestAPI\obj\Debug\RestAPI.csprojResolveAssemblyReference.cache
+c:\users\ayman\documents\visual studio 2015\Projects\RestAPI\RestAPI\obj\Debug\RestAPI.dll
+c:\users\ayman\documents\visual studio 2015\Projects\RestAPI\RestAPI\obj\Debug\RestAPI.pdb
+D:\temp\Study\Final_Project\Source_Code\RestAPI\RestAPI\bin\ApplicationInsights.config
+D:\temp\Study\Final_Project\Source_Code\RestAPI\RestAPI\bin\roslyn\csc.exe
+D:\temp\Study\Final_Project\Source_Code\RestAPI\RestAPI\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+D:\temp\Study\Final_Project\Source_Code\RestAPI\RestAPI\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+D:\temp\Study\Final_Project\Source_Code\RestAPI\RestAPI\bin\roslyn\Microsoft.CodeAnalysis.dll
+D:\temp\Study\Final_Project\Source_Code\RestAPI\RestAPI\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+D:\temp\Study\Final_Project\Source_Code\RestAPI\RestAPI\bin\roslyn\Microsoft.CSharp.Core.targets
+D:\temp\Study\Final_Project\Source_Code\RestAPI\RestAPI\bin\roslyn\Microsoft.VisualBasic.Core.targets
+D:\temp\Study\Final_Project\Source_Code\RestAPI\RestAPI\bin\roslyn\System.Collections.Immutable.dll
+D:\temp\Study\Final_Project\Source_Code\RestAPI\RestAPI\bin\roslyn\System.Reflection.Metadata.dll
+D:\temp\Study\Final_Project\Source_Code\RestAPI\RestAPI\bin\roslyn\vbc.exe
+D:\temp\Study\Final_Project\Source_Code\RestAPI\RestAPI\bin\roslyn\VBCSCompiler.exe
+D:\temp\Study\Final_Project\Source_Code\RestAPI\RestAPI\bin\roslyn\VBCSCompiler.exe.config
+D:\temp\Study\Final_Project\Source_Code\RestAPI\RestAPI\bin\RestAPI.dll.config
+D:\temp\Study\Final_Project\Source_Code\RestAPI\RestAPI\bin\RestAPI.dll
+D:\temp\Study\Final_Project\Source_Code\RestAPI\RestAPI\bin\RestAPI.pdb
+D:\temp\Study\Final_Project\Source_Code\RestAPI\RestAPI\bin\JsonServices.dll
+D:\temp\Study\Final_Project\Source_Code\RestAPI\RestAPI\bin\JsonServices.Web.dll
+D:\temp\Study\Final_Project\Source_Code\RestAPI\RestAPI\bin\Microsoft.AI.Agent.Intercept.dll
+D:\temp\Study\Final_Project\Source_Code\RestAPI\RestAPI\bin\Microsoft.AI.DependencyCollector.dll
+D:\temp\Study\Final_Project\Source_Code\RestAPI\RestAPI\bin\Microsoft.AI.PerfCounterCollector.dll
+D:\temp\Study\Final_Project\Source_Code\RestAPI\RestAPI\bin\Microsoft.AI.ServerTelemetryChannel.dll
+D:\temp\Study\Final_Project\Source_Code\RestAPI\RestAPI\bin\Microsoft.AI.Web.dll
+D:\temp\Study\Final_Project\Source_Code\RestAPI\RestAPI\bin\Microsoft.AI.WindowsServer.dll
+D:\temp\Study\Final_Project\Source_Code\RestAPI\RestAPI\bin\Microsoft.ApplicationInsights.dll
+D:\temp\Study\Final_Project\Source_Code\RestAPI\RestAPI\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+D:\temp\Study\Final_Project\Source_Code\RestAPI\RestAPI\bin\Newtonsoft.Json.dll
+D:\temp\Study\Final_Project\Source_Code\RestAPI\RestAPI\bin\Microsoft.AI.DependencyCollector.xml
+D:\temp\Study\Final_Project\Source_Code\RestAPI\RestAPI\bin\Microsoft.AI.ServerTelemetryChannel.xml
+D:\temp\Study\Final_Project\Source_Code\RestAPI\RestAPI\bin\Microsoft.AI.Web.xml
+D:\temp\Study\Final_Project\Source_Code\RestAPI\RestAPI\bin\Microsoft.AI.WindowsServer.xml
+D:\temp\Study\Final_Project\Source_Code\RestAPI\RestAPI\bin\Microsoft.ApplicationInsights.xml
+D:\temp\Study\Final_Project\Source_Code\RestAPI\RestAPI\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\temp\Study\Final_Project\Source_Code\RestAPI\RestAPI\obj\Debug\RestAPI.csprojResolveAssemblyReference.cache
+D:\temp\Study\Final_Project\Source_Code\RestAPI\RestAPI\obj\Debug\RestAPI.dll
+D:\temp\Study\Final_Project\Source_Code\RestAPI\RestAPI\obj\Debug\RestAPI.pdb
