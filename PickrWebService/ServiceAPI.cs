@@ -1066,7 +1066,9 @@ namespace JSONWebService
                         reader.Close();
                         dbConnection.Close();
 
-                        sendMessageToFirebase("/topics/"+ recepientEmail, "Ride request", senderName, "request", Email, IdOffer.ToString(), ArrivalFrom.DayOfWeek.ToString() + " " + ArrivalFrom.Day + "/" + ArrivalFrom.Month + "/" + ArrivalFrom.Year);
+                        string requestTime = ArrivalFrom.Day + "/" + ArrivalFrom.Month + "/" + ArrivalFrom.Year + " " + ArrivalFrom.Hour + ":" + ArrivalFrom.Minute;
+
+                        sendMessageToFirebase("/topics/"+ recepientEmail, "Ride request", senderName, "request", Email, requestId.ToString(), requestTime);
                     }
 
                     //else delete what was created..
@@ -1242,7 +1244,7 @@ namespace JSONWebService
                 if (dbConnection.State.ToString() == "Open") { dbConnection.Close(); }
                 if (dbConnection.State.ToString() == "Closed") { dbConnection.Open(); }
 
-                string pickupString = DateTime.TryParse(PickUp.ToString(), out pick) ? pick.DayOfWeek.ToString() + " " + pick.Day + "/" + pick.Month + "/" + pick.Year : "";
+                string pickupString = DateTime.TryParse(PickUp.ToString(), out pick) ? pick.Day + "/" + pick.Month + "/" + pick.Year + " " + pick.Hour + ":" + pick.Minute : ""; //  dd/MM/yyyy
 
                 DataTable emailsTable = new DataTable();
                 emailsTable.Columns.Add(new DataColumn("Recipient", typeof(string)));
@@ -1977,7 +1979,7 @@ namespace JSONWebService
         //}
 
 
-        public void sendMessageToFirebase(string To, string Title, string Body, string Type, string SenderEmail, string OfferId, string Date)
+        public void sendMessageToFirebase(string To, string Title, string Body, string Type, string SenderEmail, string RequestId, string Date)
         {
             const string AUTH = "AIzaSyAzmJHrw3WeLnVVqjVWemfLg7edmWS7nnA";
             const string SENDERID = "160495830166";
@@ -2002,7 +2004,7 @@ namespace JSONWebService
                         text = Body,
                         type = Type,
                         sender = SenderEmail,
-                        offer = OfferId,
+                        request = RequestId,
                         date = Date
                     }
                 };

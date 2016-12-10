@@ -32,8 +32,8 @@ namespace JSONWebService
 
             ServiceAPI s = new ServiceAPI();
             //s.sendMessageToFirebase("/topics/testTopic" , "REST", "That's the first notification you receive from our webservice. Welcome onboard!", "alert");
-            //s.CreateRequest("Tester1@gmail.com", 2, 51.769327118381300, 19.435501098632800, 51.765449591887500, 19.456357955932600, DateTime.Now, DateTime.Now.AddMinutes(5), 1);
-            s.RespondToRequest(29, DateTime.Now.AddDays(1), false);
+            s.CreateRequest("Tester1@gmail.com", 2, 51.769327118381300, 19.435501098632800, 51.765449591887500, 19.456357955932600, new DateTime(2016, 12, 9, 14, 20, 00), new DateTime(2016, 12, 9, 14, 25, 00), 1);
+            //s.RespondToRequest(31, new DateTime(2016, 12, 9, 14, 23, 00), true);
             //s.sendMessageToFirebase("/topics/ayman.khm%gmail.com" , "Ride request", "Tester" + "sent you a request to join your ride on ", "request", "Tester1@gmail.com", "2");
             ///s.CreatePreferences(true, true, true, 3);
             /*TimeSpan alertTime = new TimeSpan(17, 30, 00);
