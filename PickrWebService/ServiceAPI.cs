@@ -1070,9 +1070,9 @@ namespace JSONWebService
                             while (reader.Read())
                                 recipientTable.Rows.Add(reader["Email"], reader["DeviceToken"]);
 
-                        string recepientEmail = senderTable.Rows[0]["Email"].ToString();
+                        string recepientEmail = recipientTable.Rows[0]["Email"].ToString();
                         //recepientEmail = recepientEmail.Replace('@', '%');
-                        string recipientToken = senderTable.Rows[0]["DeviceToken"].ToString();
+                        string recipientToken = recipientTable.Rows[0]["DeviceToken"].ToString();
                         reader.Close();
                         dbConnection.Close();
 
