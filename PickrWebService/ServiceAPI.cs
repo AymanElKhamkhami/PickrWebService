@@ -1054,21 +1054,31 @@ namespace JSONWebService
                         //Sender details
                         DataTable senderTable = GetUser(Email);
                         string senderName = senderTable.Rows[0]["FirstName"].ToString();
+                        string senderPic = senderTable.Rows[0]["Picture"].ToString();
                         //Recipient details
                         if (dbConnection.State.ToString() == "Open") { dbConnection.Close(); }
                         if (dbConnection.State.ToString() == "Closed") { dbConnection.Open(); }
-                        
-                        query = "SELECT Email FROM UserDetails WHERE IdUser = (SELECT IdUser FROM Offer WHERE IdOffer = " + IdOffer + ");";
+
+                        DataTable recipientTable = new DataTable();
+                        recipientTable.Columns.Add(new DataColumn("Email", typeof(string)));
+                        recipientTable.Columns.Add(new DataColumn("DeviceToken", typeof(string)));
+
+                        query = "SELECT Email, DeviceToken FROM UserDetails WHERE IdUser = (SELECT IdUser FROM Offer WHERE IdOffer = " + IdOffer + ");";
                         command = new SqlCommand(query, dbConnection);
                         reader = command.ExecuteReader();
-                        string recepientEmail = reader.Read() ? reader.GetString(0) : "";
-                        recepientEmail = recepientEmail.Replace('@', '%');
+                        if (reader.HasRows)
+                            while (reader.Read())
+                                recipientTable.Rows.Add(reader["Email"], reader["DeviceToken"]);
+
+                        string recepientEmail = senderTable.Rows[0]["Email"].ToString();
+                        //recepientEmail = recepientEmail.Replace('@', '%');
+                        string recipientToken = senderTable.Rows[0]["DeviceToken"].ToString();
                         reader.Close();
                         dbConnection.Close();
 
                         string requestTime = ArrivalFrom.Day + "/" + ArrivalFrom.Month + "/" + ArrivalFrom.Year + " " + ArrivalFrom.Hour + ":" + ArrivalFrom.Minute;
 
-                        sendMessageToFirebase("/topics/"+ recepientEmail, "Ride request", senderName, "request", Email, requestId.ToString(), requestTime);
+                        sendMessageToFirebase(recipientToken, recepientEmail, senderName, "request", Email, requestId.ToString(), requestTime, senderPic);
                     }
 
                     //else delete what was created..
@@ -1177,6 +1187,55 @@ namespace JSONWebService
             return requestsListTable;
 
         }
+        
+        //For Android client app
+        public DataTable GetRideDetails(int RequestId, string PartnerType)
+        {
+            DataTable rideDetailsTable = new DataTable();
+
+            rideDetailsTable.Columns.Add(new DataColumn("Picture", typeof(string)));
+            rideDetailsTable.Columns.Add(new DataColumn("FirstName", typeof(string)));
+            rideDetailsTable.Columns.Add(new DataColumn("Surname", typeof(string)));
+            rideDetailsTable.Columns.Add(new DataColumn("Email", typeof(string)));
+            rideDetailsTable.Columns.Add(new DataColumn("Mobile", typeof(string)));
+            rideDetailsTable.Columns.Add(new DataColumn("CarModel", typeof(string)));
+            rideDetailsTable.Columns.Add(new DataColumn("PickupTime", typeof(string)));
+            rideDetailsTable.Columns.Add(new DataColumn("PickupLatitude", typeof(double)));
+            rideDetailsTable.Columns.Add(new DataColumn("PickupLongitude", typeof(double)));
+            rideDetailsTable.Columns.Add(new DataColumn("DropoffLatitude", typeof(double)));
+            rideDetailsTable.Columns.Add(new DataColumn("DropoffLongitude", typeof(double)));
+
+            if (dbConnection.State.ToString() == "Open") { dbConnection.Close(); }
+            if (dbConnection.State.ToString() == "Closed") { dbConnection.Open(); }
+
+            string query = "";
+            
+            if(PartnerType.Equals("passenger"))
+            {
+                query = "SELECT UserDetails.Picture, UserDetails.FirstName, UserDetails.Surname, UserDetails.Email, UserDetails.Mobile, UserDetails.CarModel, Request.PickUp, Request.StartLatitude, Request.StartLongitude, Request.DestinationLatitude, Request.DestinationLongitude FROM UserDetails JOIN Request ON (UserDetails.IdUser = Request.IdUser) WHERE IdRequest=" + RequestId + ";";
+            }
+
+            if (PartnerType.Equals("driver"))
+            {
+                query = "SELECT UserDetails.Picture, UserDetails.FirstName, UserDetails.Surname, UserDetails.Email, UserDetails.Mobile, UserDetails.CarModel, Request.PickUp, Request.StartLatitude, Request.StartLongitude, Request.DestinationLatitude, Request.DestinationLongitude FROM UserDetails JOIN Request ON (UserDetails.IdUser = (SELECT IdUser FROM Offer WHERE IdOffer = (SELECT IdOffer FROM Request WHERE IdRequest = " + RequestId +"))) WHERE IdRequest=" + RequestId + ";";
+            }
+
+            SqlCommand command = new SqlCommand(query, dbConnection);
+            SqlDataReader reader = command.ExecuteReader();
+
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    rideDetailsTable.Rows.Add(reader["Picture"], reader["FirstName"], reader["Surname"], reader["Email"], reader["Mobile"], reader["CarModel"], Convert.ToDateTime(reader["PickUp"]).ToString("dd/MM/yyyy HH:mm"), reader["StartLatitude"], reader["StartLongitude"], reader["DestinationLatitude"], reader["DestinationLongitude"]);
+                }
+            }
+
+            reader.Close();
+            dbConnection.Close();
+            return rideDetailsTable;
+
+        }
 
 
         public bool RespondToRequest(int IdRequest, object PickUp, bool Approved)
@@ -1244,28 +1303,43 @@ namespace JSONWebService
                 if (dbConnection.State.ToString() == "Open") { dbConnection.Close(); }
                 if (dbConnection.State.ToString() == "Closed") { dbConnection.Open(); }
 
-                string pickupString = DateTime.TryParse(PickUp.ToString(), out pick) ? pick.Day + "/" + pick.Month + "/" + pick.Year + " " + pick.Hour + ":" + pick.Minute : ""; //  dd/MM/yyyy
+                string pickupString = DateTime.TryParse(PickUp.ToString(), out pick) ? pick.Day + "/" + pick.Month + "/" + pick.Year + " " + pick.Hour + ":" + pick.Minute : ""; //  dd/MM/yyyy HH:mm
 
                 DataTable emailsTable = new DataTable();
                 emailsTable.Columns.Add(new DataColumn("Recipient", typeof(string)));
+                emailsTable.Columns.Add(new DataColumn("RecipientName", typeof(string)));
+                emailsTable.Columns.Add(new DataColumn("RecipientPicture", typeof(string)));
+                emailsTable.Columns.Add(new DataColumn("RecipientToken", typeof(string)));
                 emailsTable.Columns.Add(new DataColumn("Sender", typeof(string)));
                 emailsTable.Columns.Add(new DataColumn("SenderName", typeof(string)));
+                emailsTable.Columns.Add(new DataColumn("SenderPicture", typeof(string)));
+                emailsTable.Columns.Add(new DataColumn("SenderToken", typeof(string)));
 
-                query = "SELECT p.Email AS Recipient, d.Email AS Sender, d.FirstName AS SenderName FROM UserDetails p, Request JOIN UserDetails d ON (d.IdUser = (SELECT IdUser FROM Offer WHERE IdOffer = Request.IdOffer)) WHERE IdRequest =  " + IdRequest + "  AND p.IdUser = (SELECT IdUser FROM Request WHERE IdRequest =  " + IdRequest+" );";
+                query = "SELECT p.Email AS Recipient, p.FirstName AS RecipientName, p.Picture AS RecipientPicture, p.DeviceToken AS RecipientToken, d.Email AS Sender, d.FirstName AS SenderName, d.Picture AS SenderPicture, d.DeviceToken AS SenderToken FROM UserDetails p, Request JOIN UserDetails d ON (d.IdUser = (SELECT IdUser FROM Offer WHERE IdOffer = Request.IdOffer)) WHERE IdRequest =  " + IdRequest + "  AND p.IdUser = (SELECT IdUser FROM Request WHERE IdRequest =  " + IdRequest+" );";
                 command = new SqlCommand(query, dbConnection);
                 SqlDataReader reader = command.ExecuteReader();
                 if (reader.HasRows)
                     while (reader.Read())
-                        emailsTable.Rows.Add(reader["Recipient"], reader["Sender"], reader["SenderName"]);
+                        emailsTable.Rows.Add(reader["Recipient"], reader["RecipientName"], reader["RecipientPicture"], reader["RecipientToken"], reader["Sender"], reader["SenderName"], reader["SenderPicture"], reader["SenderToken"]);
 
-                string recepientEmail = emailsTable.Rows[0]["Recipient"].ToString();
-                string senderEmail = emailsTable.Rows[0]["Sender"].ToString();
+                //passenger
+                string recipientEmail = emailsTable.Rows[0]["Recipient"].ToString(); 
+                string recipientName = emailsTable.Rows[0]["RecipientName"].ToString();
+                string recipientPic = emailsTable.Rows[0]["RecipientPicture"].ToString();
+                string recipientToken = emailsTable.Rows[0]["RecipientToken"].ToString();
+                //driver
+                string senderEmail = emailsTable.Rows[0]["Sender"].ToString(); 
                 string senderName = emailsTable.Rows[0]["SenderName"].ToString();
-                recepientEmail = recepientEmail.Replace('@', '%');
+                string senderPic = emailsTable.Rows[0]["SenderPicture"].ToString();
+                string senderToken = emailsTable.Rows[0]["SenderToken"].ToString();
+                //recepientEmail = recepientEmail.Replace('@', '%');
+
                 reader.Close();
                 dbConnection.Close();
 
-                sendMessageToFirebase("/topics/" + recepientEmail, "Feedback", senderName, Approved ? "approved" : "rejected", senderEmail, IdRequest.ToString(), pickupString);
+                sendMessageToFirebase(recipientToken, recipientEmail, senderName, Approved ? "approved" : "rejected", senderEmail, IdRequest.ToString(), pickupString, senderPic);
+                //Send a self reminding message to set an alarm; The recipient and sender are switched here 
+                sendMessageToFirebase(senderToken, senderEmail, recipientName, "selfreminder", recipientEmail, IdRequest.ToString(), pickupString, recipientPic);
             }
 
 
@@ -1979,7 +2053,29 @@ namespace JSONWebService
         //}
 
 
-        public void sendMessageToFirebase(string To, string Title, string Body, string Type, string SenderEmail, string RequestId, string Date)
+        public bool UpdateDeviceToken(string Email, string Token)
+        {
+            int affected = 0;
+            if (dbConnection.State.ToString() == "Closed")
+            {
+                dbConnection.Open();
+            }
+            //
+            try
+            {
+                string query = "UPDATE UserDetails SET DeviceToken = '" + Token + "' WHERE Email = '" + Email + "';";
+                SqlCommand command = new SqlCommand(query, dbConnection);
+                affected = command.ExecuteNonQuery();
+                dbConnection.Close();
+            }
+            catch (Exception e) { }
+
+
+            return (affected > 0);
+        }
+
+
+        public void sendMessageToFirebase(string Token, string RecipientEmail, string Body, string Type, string SenderEmail, string RequestId, string Date, string Picture)
         {
             const string AUTH = "AIzaSyAzmJHrw3WeLnVVqjVWemfLg7edmWS7nnA";
             const string SENDERID = "160495830166";
@@ -1994,18 +2090,19 @@ namespace JSONWebService
 
                 var message = new
                 {
-                    to = To,
+                    to = Token,
                     priority = "high",
                     //content-available = "true",
                     data = new
 
                     {
-                        title = Title,
                         text = Body,
                         type = Type,
                         sender = SenderEmail,
+                        recipient = RecipientEmail,
                         request = RequestId,
-                        date = Date
+                        date = Date,
+                        picture = Picture
                     }
                 };
 

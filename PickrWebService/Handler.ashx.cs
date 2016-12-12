@@ -30,9 +30,10 @@ namespace JSONWebService
 
 
 
-            ServiceAPI s = new ServiceAPI();
-            //s.sendMessageToFirebase("/topics/testTopic" , "REST", "That's the first notification you receive from our webservice. Welcome onboard!", "alert");
-            s.CreateRequest("Tester1@gmail.com", 2, 51.769327118381300, 19.435501098632800, 51.765449591887500, 19.456357955932600, new DateTime(2016, 12, 9, 14, 20, 00), new DateTime(2016, 12, 9, 14, 25, 00), 1);
+            //ServiceAPI s = new ServiceAPI();
+            //s.GetRideDetails(34, "driver");
+            //s.sendMessageToFirebase("f0mgqsQRFBE:APA91bEkTncKzEQmQ8H9zj6QRwfRg4THXSa1eTOEiw1JieebuAWdXp5IMpNjmQ9lAFaE93C37GzQnc_qdIo-8UEqmRBbBlsvVW-KswFPvjNMNWpDkfRk5exRoD0RnDKcpppZXqYvmkm7", "Feedback", "Ayman", "approved", "ayman.khm%gmail.com", "31", "12/12/2016 10:25", "https://scontent.xx.fbcdn.net/v/t1.0-1/c59.0.200.200/p200x200/10354686_10150004552801856_220367501106153455_n.jpg?oh=da4eafdad0da0d0958352977771c3fd7&oe=58BE4325");
+            //s.CreateRequest("Tester1@gmail.com", 2, 51.769327118381300, 19.435501098632800, 51.765449591887500, 19.456357955932600, new DateTime(2016, 12, 9, 14, 20, 00), new DateTime(2016, 12, 9, 14, 25, 00), 1);
             //s.RespondToRequest(31, new DateTime(2016, 12, 9, 14, 23, 00), true);
             //s.sendMessageToFirebase("/topics/ayman.khm%gmail.com" , "Ride request", "Tester" + "sent you a request to join your ride on ", "request", "Tester1@gmail.com", "2");
             ///s.CreatePreferences(true, true, true, 3);

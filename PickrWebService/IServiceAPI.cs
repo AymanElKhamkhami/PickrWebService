@@ -62,6 +62,8 @@ namespace JSONWebService
 
         DataTable GetPassengerSentRequests(string Email);
 
+        DataTable GetRideDetails(int requestId, string partnerType);
+
         bool RespondToRequest(int IdRequest, object PickUp, bool Approved);
 
         bool CheckRequestExistence(string Email, int IdOffer);
@@ -75,6 +77,8 @@ namespace JSONWebService
         DataTable GetMenuNotifications(string Email);
 
         bool MarkNotificationsAsSeen(string Email);
+
+        bool UpdateDeviceToken(string Email, string Token);
 
     }
 }
